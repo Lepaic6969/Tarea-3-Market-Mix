@@ -5,47 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Mix</title>
+  
 </head>
 <body>
-    <section class="login" v-if="login">
-        <h3>Registro</h3>
-        <div>
-          <form class="" @submit.prevent="enviar">
-            <select class="select--options" v-model="cargo">
-              <option  disabled selected="">Cargo</option>
-              <option>Secretary</option>
-              <option>vendedor</option>
-              <option>ensamblador</option>
-            </select>
-      
-            <input type="text" name="" id="" placeholder="Clave" v-model="clave">
-      
-            <button type="submit" >Enviar</button>
-          </form>
-        </div>
+  
+      <section class="main" >
+          
+          <div  v-if="!loginExitoso" class="login">
+            <h3>Registro</h3>
+            <form class="" @submit.prevent="enviar">
+              <select class="select--options" v-model="cargo">
+                <option  disabled selected="">-- Cargo --</option>
+                <option>secretario</option>
+                <option>vendedor</option>
+                <option>ensamblador</option>
+                <option>administrador</option>
+              </select>
+        
+              <input type="text" name="" id="" placeholder="Clave" v-model="clave">
+        
+              <button type="submit" >Enviar</button>
+            </form>
+          </div>
+
+          <div class="administrador-sistema" v-if="direccionamiento==='administrador'">
+            <h1 >Componente Administrador del sistema</h1>
+          </div>
+
+          <div class="secretario" v-if="direccionamiento==='secretario'">
+            <h1>Componente Secretario</h1>
+          </div>
+
+          <div class="vendedor" v-if="direccionamiento==='vendedor'">
+            <h1>Componente Vendedor</h1>
+          </div>
+
+          <div class="ensamblador" v-if="direccionamiento==='ensamblador'">
+            <h1>Componente ensamblador</h1>
+          </div>
       </section>
 
-    <section class="administrador-sistema" v-if="">
+      
 
-    </section>
+      
 
-    <section class="secretario" v-if="">
+      
 
-    </section>
+      
 
-    <section class="vendedor" v-if="">
-
-    </section>
-
-    <section class="ensamblador" v-if="">
-
-    </section>
 
     <!-- Este es el CDN de Vue -->
-
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Mando a llamar al main que es el archivo principal -->
-    <script src="./js/main.js" type="module"></script>
-    <script src="./js/login.js"></script>
+    <!-- Mando a llamar al login que es el archivo principal -->
+    <script src="./js/main.js" ></script>
 </body>
+
+    
+   
 </html>
