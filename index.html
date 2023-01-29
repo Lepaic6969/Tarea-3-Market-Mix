@@ -8,6 +8,8 @@
   
 </head>
 <body>
+   <!-- Este es el CDN de Vue -->
+   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   
       <section class="main" >
           
@@ -60,11 +62,42 @@
              </div>
              <div v-show="cargoAdmin==='ensamblador'">
                 <h1>Ensamblador</h1>
-                <form class="" @submit.prevent="modificarEnsamblador">
-                  <label for="salario-ensamblador">Ingrese el salario base del ensamblador:</label>
-                  <input type="number" id="salario-ensamblador" v-model="baseEnsamblador">
-                  <button>Modificar</button>
+                <form @submit.prevent>
+                  <label for="variable-ensamblador">Selecciona los campos a modificar:</label>
+                  <select class="select--ensamblador" v-model="variableEnsamblador" id="variable-ensamblador">
+                    <option  disabled selected="">-- Cargo --</option>
+                    <option>salario</option>
+                    <option>cantidades máximas</option>
+                    <option>bonos</option>
+                  </select>
                 </form>
+                
+                <div v-if="variableEnsamblador==='salario'">
+                  <form class="" @submit.prevent="modificarEnsamblador1">
+                    <label for="salario-ensamblador">Ingrese el salario base del ensamblador:</label>
+                    <input type="number" id="salario-ensamblador" v-model="baseEnsamblador">
+                    <button>Modificar</button>
+                  </form>
+                </div>
+                <div v-if="variableEnsamblador==='cantidades máximas'">
+                  <form class="" @submit.prevent="modificarEnsamblador2">
+                    <label for="max-zapatos">Ingrese el máximo de pares de zapatos:</label>
+                    <input type="number" id="max-zapatos" v-model="maxZapatos">
+                    <label for="max-zapatillas">Ingrese el máximo de pares de zapatillas:</label>
+                    <input type="number" id="max-zapatillas" v-model="maxZapatillas">
+                    <button>Modificar</button>
+                  </form>
+                </div>
+                <div v-if="variableEnsamblador==='bonos'">
+                  <form class="" @submit.prevent="modificarEnsamblador3">
+                    <label for="bono-zapatos">Ingrese el valor del ensamble por par de zapatos:</label>
+                    <input type="number" id="bono-zapatos" v-model="bonoEnsambleZapatos">
+                    <label for="bono-zapatillas">Ingrese el valor del ensamble por par de zapatillas:</label>
+                    <input type="number" id="bono-zapatillas" v-model="bonoEnsambleZapatillas">
+                    <button>Modificar</button>
+                  </form>
+                </div>
+              
              </div>
           </div>
 
