@@ -28,8 +28,44 @@
             </form>
           </div>
 
-          <div class="administrador-sistema" v-if="direccionamiento==='administrador'">
-            <h1 >Componente Administrador del sistema</h1>
+          <!-- direccionamiento==='administrador' -->
+          <div class="administrador-sistema" v-if="true">
+            <h1 >Componente Administrador del Sistema</h1>
+             <form class="" @submit.prevent>
+              <label for="cargo">Selecciona el cargo que desea administrar</label>
+              <select class="select--options-admin" v-model="cargoAdmin" id="cargo">
+                <option  disabled selected="">-- Cargo --</option>
+                <option>secretario</option>
+                <option>vendedor</option>
+                <option>ensamblador</option>
+              </select>
+             </form>
+             <div v-show="cargoAdmin==='secretario'">
+                <h1>Secretario</h1>
+                <form class="" @submit.prevent="modificarSecretario">
+                  <label for="salario-secretario">Ingrese el salario base del secretario:</label>
+                  <input type="number" id="salario-secretario" v-model="baseSecretario">
+                  <button>Modificar</button>
+                </form>
+             </div>
+             <div v-show="cargoAdmin==='vendedor'">
+                <h1>Vendedor</h1>
+                <form class="" @submit.prevent="modificarVendedor">
+                  <label for="salario-vendedor">Ingrese el salario base del vendedor:</label>
+                  <input type="number" id="salario-vendedor" v-model="baseVendedor">
+                  <label for="comision">Ingrese la comisión (%) por ventas:</label>
+                  <input type="number" id="comision" v-model="comisionVendedor">
+                  <button>Modificar</button>
+                </form>
+             </div>
+             <div v-show="cargoAdmin==='ensamblador'">
+                <h1>Ensamblador</h1>
+                <form class="" @submit.prevent="modificarEnsamblador">
+                  <label for="salario-ensamblador">Ingrese el salario base del ensamblador:</label>
+                  <input type="number" id="salario-ensamblador" v-model="baseEnsamblador">
+                  <button>Modificar</button>
+                </form>
+             </div>
           </div>
 
           <div class="secretario" v-if="direccionamiento==='secretario'">
