@@ -23,7 +23,12 @@ const main = Vue.createApp({
         maxZapatillas:4000,
         bonoEnsambleZapatos:1000,
         bonoEnsambleZapatillas:700,
-        variableEnsamblador:''
+        variableEnsamblador:'',
+        //Variables del vendedor.
+        ventasZapatos:null,
+        ventasZapatillas:null,
+        //Variables secretario.
+        horasExtraSecretario:0,
         
       }
     },
@@ -47,7 +52,7 @@ const main = Vue.createApp({
       },
 
       redirigir(){
-        this.loginExitoso=false; //Esto es para que desaparezca la sesión del login.
+        this.loginExitoso=true; //Esto es para que desaparezca la sesión del login.
         if(this.cargo==="secretario"){
             this.direccionamiento="secretario";
         } else if(this.cargo==="vendedor"){
@@ -170,28 +175,32 @@ const main = Vue.createApp({
         alert("Modificación exitosa");
       },
   /******************************************************************************************** */
-      vendedorZapats(){ 
-        let ventasZapatos = this.$refs.zapatos.value;
-        let ventasZapatillas = this.$refs.zapatillas.value;
-        let totalVentas = (parseInt(ventasZapatos)*250000)+(parseInt(ventasZapatillas)*150000);
-        let comisionVenta = (totalVentas*this.comisionVendedor)/100;
-        let subsidio = 160000;
-        
-        if(totalVentas>5000000){
-          subsidio = (this.baseVendedor*0.1);
-        }else  if(totalVentas>10000000){
-          subsidio = (this.baseVendedor*0.2);
-        }
+      vendedorZapatos(){ 
+          let totalVentas = (this.ventasZapatos*250000)+(this.ventasZapatillas*150000);
+          let comisionVenta = (totalVentas*this.comisionVendedor)/100;
+          let subsidio = 160000;
+          let totalSalarioVendedor=0;
+          if(totalVentas<5000000){
+            totalSalarioVendedor=(this.baseVendedor)+comisionVenta+subsidio;
+          } else if(totalVentas>=5000000 && totalVentas<10000000){
+            totalSalarioVendedor=(1.1*this.baseVendedor)+comisionVenta+subsidio;
+          }else  if(totalVentas>=10000000){
+            totalSalarioVendedor=(1.2*this.baseVendedor)+comisionVenta+subsidio;
+          }
+          totalSalarioVendedor=Math.floor(totalSalarioVendedor)
+          //Aproximamos el salario para que sea un número entero.
 
-        alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el subsidio de trasporte es de ${subsidio}`);
-
-      },
+          alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el subsidio de trasporte es de ${subsidio}`);
+          alert(`El salario del vendedor es de: ${totalSalarioVendedor}`)
+        },
 
       horasSecretario(){
-        let horasExtras = this.$refs.horas.value;
-        let precioHoraExtra = this.baseSecretario * 1.8;
-        let totalHorasExtras = precioHoraExtra * horasExtras;
-        alert(`El total de horas extras es de ${totalHorasExtras}`);
+        let salarioTotal=0;
+        let precioHoraExtra = (this.baseSecretario * 1.8)/180; //180 horas de trabajo que tiene un mes.
+
+        salarioTotal=this.baseSecretario+(precioHoraExtra*this.horasExtraSecretario);
+        alert(`El valor total por las horas extras trabajadas es : ${precioHoraExtra*this.horasExtraSecretario}`);
+        alert(`El salario total del secretario es de ${salarioTotal}`);
 
       }
     }
