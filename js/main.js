@@ -173,18 +173,18 @@ const main = Vue.createApp({
       },
   /******************************************************************************************** */
       vendedorZapats(){ 
-        var ventasZapatos = this.$refs.zapatos.value;
-        var ventasZapatillas = this.$refs.zapatillas.value;
-        var totalVentas = (parseInt(ventasZapatos)*250000)+(parseInt(ventasZapatillas)*150000);
-        var comisionVenta = (totalVentas*this.comisionVendedor)/100;
-        var bono = 160000;
+        let ventasZapatos = this.$refs.zapatos.value;
+        let ventasZapatillas = this.$refs.zapatillas.value;
+        let totalVentas = (parseInt(ventasZapatos)*250000)+(parseInt(ventasZapatillas)*150000);
+        let comisionVenta = (totalVentas*this.comisionVendedor)/100;
+        let subsidio = 160000;
         
         if(totalVentas>5000000){
-            bono = (this.baseVendedor*0.1);
+          subsidio = (this.baseVendedor*0.1);
         }else  if(totalVentas>10000000){
-            bono = (this.baseVendedor*0.2);
+          subsidio = (this.baseVendedor*0.2);
         }
-        alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el bono es de ${bono}`);
+        alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el subsidio de trasporte es de ${subsidio}`);
 
       }
     }
