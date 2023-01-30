@@ -19,13 +19,14 @@ const main = Vue.createApp({
         baseVendedor:1500000, //Salario base vendedor
         baseEnsamblador:1500000,
         comisionVendedor:5, // Comisión del vendedor => 5% del total de sus ventas
+        precioZapatos:  12000,
+        precioZapatillas: 9000,
         maxZapatos:2000,
         maxZapatillas:4000,
         bonoEnsambleZapatos:1000,
         bonoEnsambleZapatillas:700,
         variableEnsamblador:''
-
-
+        
       }
     },
     methods: {
@@ -46,8 +47,9 @@ const main = Vue.createApp({
   
         alert('¡Error! El cargo o la clave son incorrectos.');
       },
+
       redirigir(){
-        this.loginExitoso=true; //Esto es para que desaparezca la sesión del login.
+        this.loginExitoso=false; //Esto es para que desaparezca la sesión del login.
         if(this.cargo==="secretario"){
             this.direccionamiento="secretario";
         } else if(this.cargo==="vendedor"){
@@ -75,6 +77,7 @@ const main = Vue.createApp({
           }
           return true;
       },
+
       validarComision(){
         let validacionExitosa=true;
           if(this.comisionVendedor>20 || this.comisionVendedor<0){
@@ -87,6 +90,7 @@ const main = Vue.createApp({
           }
           return validacionExitosa;
       },
+
       modificarSecretario(){
         // if(this.baseSecretario===1160000) return; //Este es para que no se haga nada en caso de que el valor ingresado seal el mismo que ya estaba.
         let datosCorrectos=this.validarSalario(this.baseSecretario,'secretario');
@@ -97,6 +101,7 @@ const main = Vue.createApp({
         }
         
       },
+
       modificarVendedor(){
         let comisionCorrecta=this.validarComision();
         if(!comisionCorrecta || this.comisionVendedor===5){
@@ -113,8 +118,9 @@ const main = Vue.createApp({
         }
         
       },
-      modificarEnsamblador1(){
 
+      modificarEnsamblador1(){
+        
         // if(this.baseEnsamblador===1500000) return; 
         let datosCorrectos=this.validarSalario(this.baseEnsamblador,'ensamblador');
         if(datosCorrectos){
@@ -123,6 +129,7 @@ const main = Vue.createApp({
           this.baseEnsamblador=1500000;
         }
       },
+
       modificarEnsamblador2(){
         // if(this.maxZapatos===3000 || this.maxZapatos===4000) return;
         if(this.maxZapatos==="" || this.maxZapatos===""){
@@ -143,6 +150,7 @@ const main = Vue.createApp({
         }
         alert("Modificación exitosa");
       },
+
       modificarEnsamblador3(){
         // Esta primera validación me está fallando sólo en este componente.
         // if(this.bonoEnsambleZapatos===1000 || this.bonoEnsambleZapatillas===700) return;
@@ -162,11 +170,25 @@ const main = Vue.createApp({
           return
         }
         alert("Modificación exitosa");
-      }
+      },
   /******************************************************************************************** */
+      vendedorZapats(){ 
+        var ventasZapatos = this.$refs.zapatos.value;
+        var ventasZapatillas = this.$refs.zapatillas.value;
+        var totalVentas = (parseInt(ventasZapatos)*250000)+(parseInt(ventasZapatillas)*150000);
+        var comisionVenta = (totalVentas*this.comisionVendedor)/100;
+        var bono = 160000;
+        
+        if(totalVentas>5000000){
+            bono = (this.baseVendedor*0.1);
+        }else  if(totalVentas>10000000){
+            bono = (this.baseVendedor*0.2);
+        }
+        alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el bono es de ${bono}`);
+
+      }
     }
     
   });
 
   main.mount(".main");
-  
