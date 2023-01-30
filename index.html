@@ -111,15 +111,21 @@
 
     <div class="secretario" v-if="direccionamiento==='secretario'">
       <h1>Componente Secretario</h1>
+      <form @submit.prevent="horasSecretario">
+        <label for="horas">Ingrese la cantidad de horas estras trabajadas</label>
+        <input type="number" ref="horas" max="24" min="1" placeholder="horas" required>
+        <button>Calcular</button>
+        
+      </form>
     </div>
 
     <div class="vendedor" v-if="direccionamiento==='vendedor'">
       <h1>Venderdor de zapatos y zapatillas</h1>
      <form class="" @submit.prevent="vendedorZapats">
-      <h3>Precio de zapatos: 12000</h3>
+      <h3>Precio de zapatos: 250000</h3>
       <label for="zapatos">Ingrese la cantidad de ventas de zapatos:</label>
       <input type="number" ref="zapatos" max="100" min="1" placeholder="cantidad" required>
-      <h3>Precio de zapatillas: 9000</h3>
+      <h3>Precio de zapatillas: 150000</h3>
       <label for="zapatillas">Ingrese la cantidad de ventas de zapatillas:</label>
       <input type="number" ref="zapatillas" max="100" min="1" placeholder="Cantidad" required>
       <button>Calcular</button>

@@ -19,8 +19,6 @@ const main = Vue.createApp({
         baseVendedor:1500000, //Salario base vendedor
         baseEnsamblador:1500000,
         comisionVendedor:5, // Comisión del vendedor => 5% del total de sus ventas
-        precioZapatos:  12000,
-        precioZapatillas: 9000,
         maxZapatos:2000,
         maxZapatillas:4000,
         bonoEnsambleZapatos:1000,
@@ -184,7 +182,16 @@ const main = Vue.createApp({
         }else  if(totalVentas>10000000){
           subsidio = (this.baseVendedor*0.2);
         }
+
         alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el subsidio de trasporte es de ${subsidio}`);
+
+      },
+
+      horasSecretario(){
+        let horasExtras = this.$refs.horas.value;
+        let precioHoraExtra = this.baseSecretario * 1.8;
+        let totalHorasExtras = precioHoraExtra * horasExtras;
+        alert(`El total de horas extras es de ${totalHorasExtras}`);
 
       }
     }
