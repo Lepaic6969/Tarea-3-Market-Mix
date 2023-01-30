@@ -113,7 +113,7 @@
       <h1>Componente Secretario</h1>
       <form @submit.prevent="horasSecretario">
         <label for="horas">Ingrese la cantidad de horas estras trabajadas</label>
-        <input type="number" ref="horas" max="24" min="1" placeholder="horas" required>
+        <input type="number" v-model="horasExtraSecretario"  placeholder="horas" required id="horas">
         <button>Calcular</button>
         
       </form>
@@ -121,15 +121,15 @@
 
     <div class="vendedor" v-if="direccionamiento==='vendedor'">
       <h1>Venderdor de zapatos y zapatillas</h1>
-     <form class="" @submit.prevent="vendedorZapats">
-      <h3>Precio de zapatos: 250000</h3>
-      <label for="zapatos">Ingrese la cantidad de ventas de zapatos:</label>
-      <input type="number" ref="zapatos" max="100" min="1" placeholder="cantidad" required>
-      <h3>Precio de zapatillas: 150000</h3>
-      <label for="zapatillas">Ingrese la cantidad de ventas de zapatillas:</label>
-      <input type="number" ref="zapatillas" max="100" min="1" placeholder="Cantidad" required>
-      <button>Calcular</button>
-   </form>
+      <form class="" @submit.prevent="vendedorZapatos">
+        <h3>Precio de zapatos: 250000</h3>
+        <label for="zapatos">Ingrese la cantidad de pares de zapatos vendidos:</label>
+        <input type="number" v-model="ventasZapatos" placeholder="Cantidad" required id="zapatos">
+        <h3>Precio de zapatillas: 150000</h3>
+        <label for="zapatillas">Ingrese la cantidad de pares de zapatillas vendidas:</label>
+        <input type="number" v-model="ventasZapatillas" placeholder="Cantidad" required id="zapatillas">
+        <button>Calcular</button>
+      </form>
       
       
     </div>
@@ -139,20 +139,8 @@
     </div>
 </section>
       
-
+  <!-- Este es el CDN de Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <!-- Mando a llamar al login que es el archivo principal -->
+  <script src="./js/main.js" ></script>
       
-
-      
-
-      
-
-
-    <!-- Este es el CDN de Vue -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- Mando a llamar al login que es el archivo principal -->
-    <script src="./js/main.js" ></script>
-</body>
-
-    
-   
-</html>
