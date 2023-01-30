@@ -1,3 +1,19 @@
+
+.form{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.main{
+    display: grid;
+   place-items: center;
+}
+input{
+    text-align: center;
+}
+
 .login{
 
 }
@@ -9,11 +25,72 @@
 
     
 }
-.vendedor{
 
+.secretario--hors{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+}
+
+.content--secretario{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+}
+
+.div--vendedor{
+  
 
 }
+
+.content--vendedor{
+   display: grid;
+   gap: 10px;
+   max-width: 410px;
+}
+
+
+
+.vendedor--zapats{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+
+}
+
 .ensamblador{
 
 
+}
+
+.content--ensamblador{
+   padding-bottom: 24px;
+}
+
+.ensamblador--bono{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+}
+
+.ensamblador--zapats{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+}
+
+.ensamblador--salario{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
+}
+
+.btn{
+    padding: 10px;
 }

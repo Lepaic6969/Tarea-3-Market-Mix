@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Market Mix</title>
   
 </head>
@@ -14,10 +15,11 @@
    <section class="main" >
           
     <div  v-if="!loginExitoso" class="login">
-      <h3>Registro</h3>
+      <h2>Registro</h2>
+      <h4>porfavor Ingrese su Cargo y Pin de Ingreso</h4>
       <form class="" @submit.prevent="enviar">
         <select class="select--options" v-model="cargo">
-          <option  disabled selected="">-- Cargo --</option>
+          <option disabled selected="">-- Cargo --</option>
           <option>secretario</option>
           <option>vendedor</option>
           <option>ensamblador</option>
@@ -25,117 +27,136 @@
         </select>
   
         <input type="text" name="" id="" placeholder="Clave" v-model="clave">
-  
         <button type="submit" >Enviar</button>
       </form>
     </div>
 
     <!-- direccionamiento==='administrador' -->
     <div class="administrador-sistema" v-if="direccionamiento==='administrador'">
-      <h1 >Componente Administrador del Sistema</h1>
+      <h1>Administrador del Sistema</h1>
        <form class="" @submit.prevent>
         <label for="cargo">Selecciona el cargo que desea administrar</label>
-        <select class="select--options-admin" v-model="cargoAdmin" id="cargo">
+        <div class="from">
+          
+          <select class="select--options-admin" v-model="cargoAdmin" id="cargo">
           <option  disabled selected="">-- Cargo --</option>
           <option>secretario</option>
           <option>vendedor</option>
           <option>ensamblador</option>
         </select>
        </form>
+        </div>
 
        <div v-show="cargoAdmin==='secretario'">
           <h1>Secretario</h1>
           <form class="" @submit.prevent="modificarSecretario">
-            <label for="salario-secretario">Ingrese el salario base del secretario:</label>
+            <div class="content--secretario">
+              <label for="salario-secretario">Ingrese el salario base del secretario:</label>
             <input type="number" id="salario-secretario" v-model="baseSecretario">
-            <button>Modificar</button>
+            <button class="btn">Modificar</button>
+            </div>
           </form>
        </div>
 
-       <div v-show="cargoAdmin==='vendedor'">
+       <div class="div--vendedor" v-show="cargoAdmin==='vendedor'">
           <h1>Vendedor</h1>
           <form class="" @submit.prevent="modificarVendedor">
+            <div class="content--vendedor">
             <label for="salario-vendedor">Ingrese el salario base del vendedor:</label>
             <input type="number" id="salario-vendedor" v-model="baseVendedor">
             <label for="comision">Ingrese la comisión (%) por ventas:</label>
             <input type="number" id="comision" v-model="comisionVendedor">
-            <button>Modificar</button>
+            <button class="btn">Modificar</button>
+            </div>
           </form>
        </div>
 
        <div v-show="cargoAdmin==='ensamblador'">
           <h1>Ensamblador</h1>
-          <form @submit.prevent>
-            <label for="variable-ensamblador">Selecciona los campos a modificar:</label>
-            <select class="select--ensamblador" v-model="variableEnsamblador" id="variable-ensamblador">
-              <option  disabled selected="">-- Cargo --</option>
-              <option>salario</option>
-              <option>cantidades máximas</option>
-              <option>bonos</option>
-            </select>
-          </form>
+          <div class="content--ensamblador">
+            <form @submit.prevent>
+              <label for="variable-ensamblador">Selecciona los campos a modificar:</label>
+              <div class="from">
+              <select v-model="variableEnsamblador" id="variable-ensamblador">
+                <option  disabled selected="">-- Cargo --</option>
+                <option>salario</option>
+                <option>cantidades máximas</option>
+                <option>bonos</option>
+              </select>
+             </div>
+            </form>
+          </div>
           
           <div v-if="variableEnsamblador==='salario'">
             <form class="" @submit.prevent="modificarEnsamblador1">
-              <label for="salario-ensamblador">Ingrese el salario base del ensamblador:</label>
-              <input type="number" id="salario-ensamblador" v-model="baseEnsamblador">
-              <button>Modificar</button>
+              <div class="ensamblador--salario">
+                <label for="salario-ensamblador">Ingrese el salario base del ensamblador:</label>
+                <input type="number" id="salario-ensamblador" v-model="baseEnsamblador">
+                <button class="btn">Modificar</button>
+              </div>
             </form>
           </div>
 
           <div v-if="variableEnsamblador==='cantidades máximas'">
             <form class="" @submit.prevent="modificarEnsamblador2">
-              <label for="max-zapatos">Ingrese el máximo de pares de zapatos:</label>
+              <div class="ensamblador--zapats">
+                <label for="max-zapatos">Ingrese el máximo de pares de zapatos:</label>
               <input type="number" id="max-zapatos" v-model="maxZapatos">
               <label for="max-zapatillas">Ingrese el máximo de pares de zapatillas:</label>
               <input type="number" id="max-zapatillas" v-model="maxZapatillas">
-              <button>Modificar</button>
+              <button class="btn">Modificar</button>
+              </div>
             </form>
           </div>
 
           <div v-if="variableEnsamblador==='bonos'">
             <form class="" @submit.prevent="modificarEnsamblador3">
+             <div class="ensamblador--bono">
               <label for="bono-zapatos">Ingrese el valor del ensamble por par de zapatos:</label>
               
               <input type="number" id="bono-zapatos" v-model="bonoEnsambleZapatos">
               <label for="bono-zapatillas">Ingrese el valor del ensamble por par de zapatillas:</label>
      
               <input type="number" id="bono-zapatillas" v-model="bonoEnsambleZapatillas">
-              <button>Modificar</button>
+              <button class="btn">Modificar</button>
+             </div>
             </form>
           </div>
         
        </div>
-
     </div>
 
     <div class="secretario" v-if="direccionamiento==='secretario'">
-      <h1>Componente Secretario</h1>
+      <h1>Cargo: Secretario</h1>
       <form @submit.prevent="horasSecretario">
-        <label for="horas">Ingrese la cantidad de horas estras trabajadas</label>
+        <div class="secretario--hors">
+          <label for="horas">Ingrese la cantidad de horas estras trabajadas</label>
         <input type="number" v-model="horasExtraSecretario"  placeholder="horas" required id="horas">
-        <button>Calcular</button>
+        <button class="btn">Calcular</button>
+        </div>
         
       </form>
     </div>
 
     <div class="vendedor" v-if="direccionamiento==='vendedor'">
-      <h1>Venderdor de zapatos y zapatillas</h1>
+      <h1>Cargo: Venderdor de zapatos y zapatillas</h1>
       <form class="" @submit.prevent="vendedorZapatos">
-        <h3>Precio de zapatos: 250000</h3>
+        <div class="vendedor--zapats">
+          <h3>Precio de zapatos: 250000</h3>
         <label for="zapatos">Ingrese la cantidad de pares de zapatos vendidos:</label>
         <input type="number" v-model="ventasZapatos" placeholder="Cantidad" required id="zapatos">
         <h3>Precio de zapatillas: 150000</h3>
         <label for="zapatillas">Ingrese la cantidad de pares de zapatillas vendidas:</label>
         <input type="number" v-model="ventasZapatillas" placeholder="Cantidad" required id="zapatillas">
-        <button>Calcular</button>
+        <button class="btn">Calcular</button>
+        </div>
       </form>
       
       
     </div>
 
     <div class="ensamblador" v-if="direccionamiento==='ensamblador'">
-      <h1>Componente ensamblador</h1>
+      <h1>Cargo; ensamblador</h1>
     </div>
 </section>
       
