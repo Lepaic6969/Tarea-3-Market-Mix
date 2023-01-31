@@ -28,12 +28,18 @@ const main = Vue.createApp({
         ventasZapatos:null,
         ventasZapatillas:null,
         //Variables secretario.
-        horasExtraSecretario:0,
+        horasExtraSecretario:null,
          //Variables ensamblador.
         horasExtraEnsamblador:null,
         zapatosEnsamblados:null,
         zapatillasEnsambladas:null,
         cantidadHijos:null,
+        trabajadoresArr:{
+          total:0,
+          totalSecretarios:0,
+          totalVendedores:0,
+          totalEnsambladores:0
+        }
         
       }
     },
@@ -68,6 +74,11 @@ const main = Vue.createApp({
             this.direccionamiento="administrador";
         }
       }, 
+      regresarAlInicio(){
+        // console.log("Estamos trabajando en regresar al inicio");
+        this.loginExitoso=false;
+        this.direccionamiento='';
+      },
       /******************************************************************************************** */
       //ESTOS SON MÉTODOS DEL ADMINISTRADOR.
       validarSalario(salario,cargo){
@@ -180,7 +191,17 @@ const main = Vue.createApp({
         alert("Modificación exitosa");
       },
   /******************************************************************************************** */
+      nuevoVendedor(){
+        document.getElementById("calcular-vendedor").disabled=false;
+      },
+      nuevoSecretario(){
+        document.getElementById("calcular-secretario").disabled=false;
+      },
+      nuevoEnsamblador(){
+        document.getElementById("calcular-ensamblador").disabled=false;
+      },
       vendedorZapatos(){ 
+
           let totalVentas = (this.ventasZapatos*250000)+(this.ventasZapatillas*150000);
           let comisionVenta = (totalVentas*this.comisionVendedor)/100;
           let subsidio = 160000;
@@ -192,20 +213,32 @@ const main = Vue.createApp({
           }else  if(totalVentas>=10000000){
             totalSalarioVendedor=(1.2*this.baseVendedor)+comisionVenta+subsidio;
           }
-          totalSalarioVendedor=Math.floor(totalSalarioVendedor)
-          //Aproximamos el salario para que sea un número entero.
+           //Aproximamos el salario para que sea un número entero.
+          totalSalarioVendedor=Math.floor(totalSalarioVendedor);
 
+          //Guardo los resultados.
+          this.trabajadoresArr.total+=totalSalarioVendedor;
+          this.trabajadoresArr.totalVendedores+=totalSalarioVendedor;
+         //Bloqueamos los campos hasta que el usuario confirme que quiere registrar a alguien más.
+          document.getElementById("calcular-vendedor").disabled=true;
           alert(`El total de ventas es de ${totalVentas}, la comisión es de ${comisionVenta} y el subsidio de trasporte es de ${subsidio}`);
-          alert(`El salario del vendedor es de: ${totalSalarioVendedor}`)
+          alert(`El salario del vendedor es de: ${totalSalarioVendedor.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}`)
         },
+      
 
       horasSecretario(){
         let salarioTotal=0;
         let precioHoraExtra = (this.baseSecretario * 1.8)/180; //180 horas de trabajo que tiene un mes.
 
         salarioTotal=this.baseSecretario+(precioHoraExtra*this.horasExtraSecretario);
+        //Guardo los resultados.
+        this.trabajadoresArr.total+=salarioTotal;
+        this.trabajadoresArr.totalSecretarios+=salarioTotal;
+
+        //Bloqueamos nuevos registros hasta que el usuario nos informe lo contrario.
+        document.getElementById("calcular-secretario").disabled=true;
         alert(`El valor total por las horas extras trabajadas es : ${precioHoraExtra*this.horasExtraSecretario}`);
-        alert(`El salario total del secretario es de ${salarioTotal}`);
+        alert(`El salario total del secretario es de ${salarioTotal.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}`);
 
       },
       ensamblador(){
@@ -266,7 +299,14 @@ const main = Vue.createApp({
 
         salarioTotal=this.baseEnsamblador+subsidioTransporte+bonoPorEnsambles+costoHorasExtras+bonoPorHijos;
         salarioTotal=Math.floor(salarioTotal);
-        alert(`El salario a pagar para el ensamblador es de: ${salarioTotal}`)
+
+         //Guardo los resultados.
+         this.trabajadoresArr.total+=salarioTotal;
+         this.trabajadoresArr.totalEnsambladores+=salarioTotal;
+
+         //Desabilito hasta que se me indique lo contrario.
+        document.getElementById("calcular-ensamblador").disabled=true;
+        alert(`El salario a pagar para el ensamblador es de: ${salarioTotal.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}`)
       }
 
     }

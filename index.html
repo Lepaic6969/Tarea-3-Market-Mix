@@ -39,7 +39,7 @@
         </form>
       </div>
   
-      <!-- direccionamiento==='administrador' -->
+      
       <div class="administrador-sistema" v-if="direccionamiento==='administrador'">
         <h2>Administrador del Sistema</h2>
          <form class="" @submit.prevent>
@@ -132,6 +132,7 @@
             </div>
           
          </div>
+         
       </div>
   
       <div class="secretario" v-if="direccionamiento==='secretario'">
@@ -140,10 +141,11 @@
           <div class="secretario--hors">
             <label for="horas">Ingrese la cantidad de horas estras trabajadas</label>
           <input type="number" v-model="horasExtraSecretario"  placeholder="horas" required id="horas">
-          <button class="btn">Calcular</button>
+          <button class="btn" id="calcular-secretario">Calcular</button>
           </div>
           
         </form>
+        <button class="btn-habilitar" v-on:click="nuevoSecretario">Agregar un nuevo registro</button>
       </div>
   
       <div class="vendedor" v-if="direccionamiento==='vendedor'">
@@ -156,18 +158,18 @@
           <h3>Precio de zapatillas: 150000</h3>
           <label for="zapatillas">Ingrese la cantidad de pares de zapatillas vendidas:</label>
           <input type="number" v-model="ventasZapatillas" placeholder="Cantidad" required id="zapatillas">
-          <button class="btn">Calcular</button>
+          <button class="btn" id="calcular-vendedor">Calcular</button>
           </div>
         </form>
-        
-        
+        <button class="btn-habilitar" v-on:click="nuevoVendedor">Agregar un nuevo registro</button>
+      
       </div>
   
       <div class="ensamblador" v-if="direccionamiento==='ensamblador'">
-        <h2>Cargo; ensamblador</h2>
+        <h2>Cargo Ensamblador</h2>
         <form class="" @submit.prevent="ensamblador">
           <div class="content--ensamblador">
-          <label for="horas-ensamblador">Ingrese la cantidad de horas estras trabajadas:</label>
+          <label for="horas-ensamblador">Ingrese la cantidad de horas extra trabajadas:</label>
           <input type="number" v-model="horasExtraEnsamblador"  placeholder="horas" required id="horas-ensamblador">
           
           <label for="zapatos-ensamblados">Ingrese la cantidad de pares de zapatos ensamblados:</label>
@@ -178,10 +180,25 @@
   
           <label for="cantidad-hijos">Ingrese la cantidad de hijos que tiene:</label>
           <input type="number" v-model="cantidadHijos" placeholder="Cantidad" required id="cantidad-hijos">
-          <button  class="btn">Calcular</button>
+          <button  class="btn" id="calcular-ensamblador">Calcular</button>
           </div>
-  </form>
+        </form>
+        <button class="btn-habilitar" v-on:click="nuevoEnsamblador">Agregar un nuevo registro</button>
+       
       </div>
+      <!-- ******************************************************************* -->
+      
+    <div class="resultados" v-if="trabajadoresArr.total!==0 && !loginExitoso" >
+      <h2>Reporte de Nómina</h2>
+      <ul class="lista-resultados">
+        <li><b>Total a pagar por Secretarios: </b> {{trabajadoresArr.totalSecretarios.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</li>
+        <li><b>Total a pagar por Vendedores: </b> {{trabajadoresArr.totalVendedores.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</li>
+        <li><b> Total a pagar por Ensambladores:</b> {{trabajadoresArr.totalEnsambladores.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</li>
+      </ul>
+      <p><b>Total a pagar por todos: </b> {{trabajadoresArr.total.toLocaleString('es-ES',{style:'currency',currency:'COP',maximumFractionDigits: 0})}}</p>
+    </div>
+    <button class="inicio-btn" v-on:click="regresarAlInicio" v-if="loginExitoso">Regresar al inicio</button>
+    <!-- ********************************************************************** -->
      </section>
   </main>
 

@@ -13,7 +13,7 @@
 .section--main{
    display: grid;
    place-items: center;
-   max-width: 600px;
+   max-width: 450px;
    margin: 0 auto;
    padding: 30px;
    padding-bottom: 40px;
@@ -23,6 +23,8 @@
    background: #4CA1AF; 
    background: -webkit-linear-gradient(to top, #C4E0E5, #4CA1AF);  
    background: linear-gradient(to top, #C4E0E5, #4CA1AF); 
+
+   margin-top: 100px;
    
 
 }
@@ -120,8 +122,41 @@ select{
     max-width: 410px;
 }
 
-.btn{
+.btn,.inicio-btn{
     padding: 10px;
     border: solid 1px rgb(162, 162, 162);
     color:  rgb(48, 48, 48);
+}
+
+.inicio-btn{
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.btn-habilitar{
+    width: 100%;
+    margin:10px auto;
+    padding: 10px ;
+}
+.resultados{
+    margin-top: 10px;
+    /* background-color:  rgba(70,201,207,0.1);; */
+    /* border: 3px solid rgb(70,201,207); */
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.lista-resultados{
+    list-style: none;
+}
+
+body{
+    background-image: url("https://uploadgerencie.com/imagenes/como-se-liquida-la-nomina.png");
+    background-color: rgb(70,201,207);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (max-width:700px){
+    .section--main{
+        width: 90%;
+     }
 }
