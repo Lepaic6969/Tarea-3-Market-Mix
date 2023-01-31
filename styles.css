@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+}
 
 .form{
     display: flex;
@@ -6,24 +10,50 @@
 }
 
 
-.main{
-    display: grid;
+.section--main{
+   display: grid;
    place-items: center;
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 30px;
+   padding-bottom: 40px;
+   border: 1px solid rgb(162, 162, 162);
+   border-radius: 10px;
+
+   background: #4CA1AF; 
+   background: -webkit-linear-gradient(to top, #C4E0E5, #4CA1AF);  
+   background: linear-gradient(to top, #C4E0E5, #4CA1AF); 
+   
+
 }
-input{
+
+h2, h4 {
+   color:  rgb(48, 48, 48);
+   
+}
+
+.login--form{
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+input {
+    width: 100px;
+    padding: 2px;
     text-align: center;
+    border: solid 1px rgb(162, 162, 162);
+    color:  rgb(48, 48, 48);
 }
 
-.login{
-
-}
-.administrador-sistema{
-
-}
-
-.secretario{
-
-    
+select{
+    width: 130px;
+    padding: 2px;
+    text-align: center;
+    border: solid 1px rgb(162, 162, 162);
+    color:  rgb(48, 48, 48);
 }
 
 .secretario--hors{
@@ -31,6 +61,7 @@ input{
     flex-direction: column;
     gap: 10px;
     max-width: 410px;
+    
 }
 
 .content--secretario{
@@ -40,17 +71,12 @@ input{
     max-width: 410px;
 }
 
-.div--vendedor{
-  
-
-}
 
 .content--vendedor{
    display: grid;
    gap: 10px;
    max-width: 410px;
 }
-
 
 
 .vendedor--zapats{
@@ -61,13 +87,16 @@ input{
 
 }
 
-.ensamblador{
 
-
+.div--ensamblador{
+   padding-bottom: 24px;
 }
 
 .content--ensamblador{
-   padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 410px;
 }
 
 .ensamblador--bono{
@@ -93,4 +122,6 @@ input{
 
 .btn{
     padding: 10px;
+    border: solid 1px rgb(162, 162, 162);
+    color:  rgb(48, 48, 48);
 }
