@@ -16,7 +16,7 @@
           
     <div  v-if="!loginExitoso" class="login">
       <h2>Registro</h2>
-      <h4>porfavor Ingrese su Cargo y Pin de Ingreso</h4>
+      <h4>Por favor Ingrese su Cargo y Pin de Ingreso</h4>
       <form class="" @submit.prevent="enviar">
         <select class="select--options" v-model="cargo">
           <option disabled selected="">-- Cargo --</option>
@@ -157,6 +157,20 @@
 
     <div class="ensamblador" v-if="direccionamiento==='ensamblador'">
       <h1>Cargo; ensamblador</h1>
+      <form class="" @submit.prevent="ensamblador">
+        <label for="horas-ensamblador">Ingrese la cantidad de horas estras trabajadas:</label>
+        <input type="number" v-model="horasExtraEnsamblador"  placeholder="horas" required id="horas-ensamblador">
+        
+        <label for="zapatos-ensamblados">Ingrese la cantidad de pares de zapatos ensamblados:</label>
+        <input type="number" v-model="zapatosEnsamblados" placeholder="Cantidad" required id="zapatos-ensamblados">
+      
+        <label for="zapatillas-ensambladas">Ingrese la cantidad de pares de zapatillas ensambladas:</label>
+        <input type="number" v-model="zapatillasEnsambladas" placeholder="Cantidad" required id="zapatillas-ensambladas">
+
+        <label for="cantidad-hijos">Ingrese la cantidad de hijos que tiene:</label>
+        <input type="number" v-model="cantidadHijos" placeholder="Cantidad" required id="cantidad-hijos">
+        <button>Calcular</button>
+</form>
     </div>
 </section>
       

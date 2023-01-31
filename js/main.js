@@ -29,6 +29,11 @@ const main = Vue.createApp({
         ventasZapatillas:null,
         //Variables secretario.
         horasExtraSecretario:0,
+         //Variables ensamblador.
+        horasExtraEnsamblador:null,
+        zapatosEnsamblados:null,
+        zapatillasEnsambladas:null,
+        cantidadHijos:null,
         
       }
     },
@@ -202,7 +207,68 @@ const main = Vue.createApp({
         alert(`El valor total por las horas extras trabajadas es : ${precioHoraExtra*this.horasExtraSecretario}`);
         alert(`El salario total del secretario es de ${salarioTotal}`);
 
+      },
+      ensamblador(){
+        let salarioTotal=0;
+        //BONO POR TRANSPORTE.
+        const subsidioTransporte = 160000; 
+       
+        //CALCULO EL BONO POR EL TRABAJO REALIZADO AL ENSAMBLAR EL PRODUCTO.
+        let bonoPorEnsambles=0; 
+        //Por zapatos ensamblados.
+        if(this.zapatosEnsamblados<1000 && this.zapatosEnsamblados>=0){
+          bonoPorEnsambles+=this.bonoEnsambleZapatos*this.zapatosEnsamblados;
+        }else if(this.zapatosEnsamblados>=1000 && this.zapatosEnsamblados<2000){
+          bonoPorEnsambles+=1.1*this.bonoEnsambleZapatos*this.zapatosEnsamblados;
+        }else if(this.zapatosEnsamblados>=2000 && this.zapatosEnsamblados<=this.maxZapatos){
+          bonoPorEnsambles+=(1.2*this.bonoEnsambleZapatos*this.zapatosEnsamblados);
+        }else if(this.zapatosEnsamblados>this.maxZapatos){
+          alert(`El valor máximo de los zapatos que puede ensamblar por mes es: ${this.maxZapatos}`);
+          return
+        }else{
+          alert("El número de ensambles de zapatos por mes deben ser mayores a cero.")
+          return
+        }
+
+        //Por zapatillas ensambladas.
+        if(this.zapatillasEnsambladas<1700 && this.zapatillasEnsambladas>=0){
+          bonoPorEnsambles+=this.bonoEnsambleZapatillas*this.zapatillasEnsambladas;
+        }else if(this.zapatillasEnsambladas>=1700 && this.zapatillasEnsambladas<3000){
+          bonoPorEnsambles+=1.15*this.bonoEnsambleZapatillas*this.zapatillasEnsambladas;
+        }else if(this.zapatillasEnsambladas>=3000 && this.zapatillasEnsambladas<=this.maxZapatillas){
+          bonoPorEnsambles+=1.3*this.bonoEnsambleZapatillas*this.zapatillasEnsambladas;
+        }else if(this.zapatillasEnsambladas>this.maxZapatillas){
+          alert(`El valor máximo de laz zapatillas que puede ensamblar por mes es: ${this.maxZapatillas}`);
+          return
+        }else{
+          alert("El número de ensambles de zapatillas por mes deben ser mayores a cero.")
+          return
+        }
+         //CALCULO EL VALOR  DE LAS HORAS EXTRA TRABAJADAS -> 220%.
+         if(this.horasExtraEnsamblador<0){
+          alert(`Las horas extras trabajadas no pueden ser un número negativo`);
+          return
+         }
+         let precioHoraExtra = (this.baseEnsamblador * 2.2)/180; //180 horas de trabajo que tiene un mes.
+         let costoHorasExtras=precioHoraExtra*this.horasExtraEnsamblador; 
+
+        //CALCULO EL BONO POR LOS HIJOS.
+        let bonoPorHijos=0; 
+        if(this.cantidadHijos<0){
+          alert(`Recuerde que la cantidad de hijos debe ser mayor a cero`);
+          return
+        }
+        if(this.cantidadHijos===1){
+          bonoPorHijos=80000;
+        }else if(this.cantidadHijos>1){
+          bonoPorHijos=60000*this.cantidadHijos;
+        }
+
+        salarioTotal=this.baseEnsamblador+subsidioTransporte+bonoPorEnsambles+costoHorasExtras+bonoPorHijos;
+        salarioTotal=Math.floor(salarioTotal);
+        alert(`El salario a pagar para el ensamblador es de: ${salarioTotal}`)
       }
+
     }
     
   });
